@@ -10,10 +10,9 @@ import random
 import albumentations as A
 
 
-
 def parse_args(args):
     parser = argparse.ArgumentParser("test model")
-    parser.add_argument('--class-names', default='dataset/pothole.names')
+    parser.add_argument('--class-names', default='dataset/coco.names')
     parser.add_argument('--pic-dir',default='images/pothole_pictures')
     parser.add_argument('--model-path', default='output_model/pothole/best_p5_0.791')
 

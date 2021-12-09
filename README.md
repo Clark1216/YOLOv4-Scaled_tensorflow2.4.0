@@ -42,7 +42,7 @@ ScaledYOLOv4_tiny_detection_result:
 
 ## Installation
 ###  1. Clone project
-  ``` 
+  ```
   git clone https://github.com/wangermeng2021/Scaled-YOLOv4-tensorflow2.git
   cd Scaled-YOLOv4-tensorflow2
   ```
@@ -55,44 +55,52 @@ ScaledYOLOv4_tiny_detection_result:
 I strongly recommend using voc dataset type(default dataset type), because my GPU is old, so coco dataset type is not fully tested.
 
 ## Training:
-* Download Pre-trained p5 coco pretrain models and place it under directory 'pretrained/ScaledYOLOV4_p5_coco_pretrain' :<br>
-   [https://drive.google.com/file/d/1glOCE3Y5Q5enW3rpVq3SmKDXzaKIw4YL/view?usp=sharing](https://drive.google.com/file/d/1glOCE3Y5Q5enW3rpVq3SmKDXzaKIw4YL/view?usp=sharing) <br>
+* Download Pre-trained p5 coco pretrain models and place it under directory `pretrained/ScaledYOLOV4_p5_coco_pretrain` :<br>
+   [Download link of Pre-trained p5 coco pretrain models](https://drive.google.com/file/d/1glOCE3Y5Q5enW3rpVq3SmKDXzaKIw4YL/view?usp=sharing) <br>
 
-* Download Pre-trained p6 coco pretrain models and place it under directory 'pretrained/ScaledYOLOV4_p6_coco_pretrain' :<br>
-   [https://drive.google.com/file/d/1EymbpgiO6VkCCFdB0zSTv0B9yB6T9Fw1/view?usp=sharing](https://drive.google.com/file/d/1EymbpgiO6VkCCFdB0zSTv0B9yB6T9Fw1/view?usp=sharing) <br>
+* Download Pre-trained p6 coco pretrain models and place it under directory `pretrained/ScaledYOLOV4_p6_coco_pretrain` :<br>
+   [Download link of Pre-trained p6 coco pretrain models](https://drive.google.com/file/d/1EymbpgiO6VkCCFdB0zSTv0B9yB6T9Fw1/view?usp=sharing) <br>
 
-* Download Pre-trained tiny coco pretrain models and place it under directory 'pretrained/ScaledYOLOV4_tiny_coco_pretrain' :<br>
-   [https://drive.google.com/file/d/1x15FN7jCAFwsntaMwmSkkgIzvHXUa7xT/view?usp=sharing](https://drive.google.com/file/d/1x15FN7jCAFwsntaMwmSkkgIzvHXUa7xT/view?usp=sharing) <br>
+* Download Pre-trained tiny coco pretrain models and place it under directory `pretrained/ScaledYOLOV4_tiny_coco_pretrain`:
+   [Download link of Pre-trained tiny coco pretrain models](https://drive.google.com/file/d/1x15FN7jCAFwsntaMwmSkkgIzvHXUa7xT/view?usp=sharing) <br> <br>
 
-
-
-
-* For training on [Pothole dataset](https://public.roboflow.com/object-detection/pothole)(No need to download dataset,it's already included in project): <br>
+* Download VOC
+  ```
+  bash dataset/get_voc.sh
+  ```
+* For training on VOC dataset:
   p5(single scale):
   ```
-  python train.py --use-pretrain True --model-type p5 --dataset-type voc --dataset dataset/pothole_voc --num-classes 1 --class-names pothole.names  --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 200 --batch-size 4 --multi-scale 416 --augment ssd_random_crop 
+  python train.py --use-pretrain True --model-type p5 --dataset-type voc --dataset dataset/VOCdevkit --num-classes 20 --class-names voc.names  --voc-train-set VOC2012,train --voc-val-set VOC2012,val  --epochs 20 --batch-size 4 --multi-scale 416 --augment ssd_random_crop
+  ```
+  <br>
+* For training on [Pothole dataset](https://public.roboflow.com/object-detection/pothole)(No need to download dataset,it's already included in project):
+  p5(single scale):
+  ```
+  python train.py --use-pretrain True --model-type p5 --dataset-type voc --dataset dataset/pothole_voc --num-classes 1 --class-names pothole.names  --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 200 --batch-size 4 --multi-scale 416 --augment ssd_random_crop
   ```
   p5(multi scale):
   ```
-  python train.py --use-pretrain True --model-type p5 --dataset-type voc --dataset dataset/pothole_voc --num-classes 1 --class-names pothole.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 200 --batch-size 4 --multi-scale 320,352,384,416,448,480,512 --augment ssd_random_crop 
+  python train.py --use-pretrain True --model-type p5 --dataset-type voc --dataset dataset/pothole_voc --num-classes 1 --class-names pothole.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 200 --batch-size 4 --multi-scale 320,352,384,416,448,480,512 --augment ssd_random_crop
   ```
+  <br>
 * For training on [Chess Pieces dataset](https://public.roboflow.com/object-detection/chess-full)(No need to download dataset,it's already included in project): <br>
   tiny(single scale):
   ```
-  python train.py --use-pretrain True --model-type tiny --dataset-type voc --dataset dataset/chess_voc --num-classes 12 --class-names chess.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 400 --batch-size 32 --multi-scale 416 --augment ssd_random_crop 
+  python train.py --use-pretrain True --model-type tiny --dataset-type voc --dataset dataset/chess_voc --num-classes 12 --class-names chess.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 400 --batch-size 32 --multi-scale 416 --augment ssd_random_crop
   ```
   tiny(multi scale):
   ```
   python train.py --use-pretrain True --model-type tiny --dataset-type voc --dataset dataset/chess_voc --num-classes 12 --class-names chess.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 400 --batch-size 32 --multi-scale 320,352,384,416,448,480,512 --augment ssd_random_crop
-
+  ```
 * For training with SAM_sgd on [Chess Pieces dataset](https://public.roboflow.com/object-detection/chess-full): <br>
   ```
-  python train.py --optimizer SAM_sgd --use-pretrain True --model-type tiny --dataset-type voc --dataset dataset/chess_voc --num-classes 12 --class-names chess.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 400 --batch-size 32 --multi-scale 416 --augment ssd_random_crop 
+  python train.py --optimizer SAM_sgd --use-pretrain True --model-type tiny --dataset-type voc --dataset dataset/chess_voc --num-classes 12 --class-names chess.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 400 --batch-size 32 --multi-scale 416 --augment ssd_random_crop
   ```
 * For training with ema(Exponential Moving Average) on [Chess Pieces dataset](https://public.roboflow.com/object-detection/chess-full): <br>
   ```
-  python train.py --ema True --use-pretrain True --model-type tiny --dataset-type voc --dataset dataset/chess_voc --num-classes 12 --class-names chess.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 400 --batch-size 32 --multi-scale 416 --augment ssd_random_crop 
-  ``` 
+  python train.py --ema True --use-pretrain True --model-type tiny --dataset-type voc --dataset dataset/chess_voc --num-classes 12 --class-names chess.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 400 --batch-size 32 --multi-scale 416 --augment ssd_random_crop
+  ```
 ## Tensorboard visualization:
   * Navigate to [http://0.0.0.0:6006](http://0.0.0.0:6006)
 
@@ -105,9 +113,9 @@ I strongly recommend using voc dataset type(default dataset type), because my GP
 | AlexeyAB's YoloV4(416)                              |              |  0.814  |       |      |
 | Scaled-YoloV4-p5(416)                               |              |  0.826  |       |      |
 
-* Evaluation on Pothole dataset: 
+* Evaluation on Pothole dataset:
 ![tensorboard_pothole_p5.png](https://github.com/wangermeng2021/ScaledYOLOv4-tensorflow2/blob/main/images/tensorboard_pothole_p5.png)
-* Evaluation on chess dataset: 
+* Evaluation on chess dataset:
 ![tensorboard_chess_tiny.png](https://github.com/wangermeng2021/ScaledYOLOv4-tensorflow2/blob/main/images/tensorboard_chess_tiny.png)
 ## Detection
 * For detection on Chess Pieces dataset:
@@ -130,9 +138,9 @@ I strongly recommend using voc dataset type(default dataset type), because my GP
 ## Customzied training
 * Convert your dataset to Pascal VOC format(you can use labelImg to generate VOC format dataset)
 * Generate class names file(such as xxx.names)
-* 
+*
   ```
-  python train.py --use-pretrain True --model-type p5 --dataset-type voc --dataset your_dataset_root_dir --num-classes num_of_classes --class-names path_of_xxx.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 200 --batch-size 8 --multi-scale 416  --augment ssd_random_crop 
+  python train.py --use-pretrain True --model-type p5 --dataset-type voc --dataset your_dataset_root_dir --num-classes num_of_classes --class-names path_of_xxx.names --voc-train-set dataset_1,train --voc-val-set dataset_1,val  --epochs 200 --batch-size 8 --multi-scale 416  --augment ssd_random_crop
   ```
 ## Deployment
 TensorFlow Serving is a flexible, high-performance serving system for machine learning models, designed for production environments.it include two parts:clients and server, we can run them on one machine.<br>
@@ -146,9 +154,9 @@ TensorFlow Serving is a flexible, high-performance serving system for machine le
 ```
 * **Deploy model:**<br>
     * **Server side**( docker and nvidia-docker installed ):
-	
+
         ` ./run_image `
-	
+
     * **Client side**(no need to install tensorflow):<br>
         1. install client package
 
@@ -164,6 +172,3 @@ TensorFlow Serving is a flexible, high-performance serving system for machine le
 * [https://github.com/WongKinYiu/ScaledYOLOv4](https://github.com/WongKinYiu/ScaledYOLOv4)
 * [https://github.com/ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 * [https://github.com/dmlc/gluon-cv](https://github.com/dmlc/gluon-cv)
-
-
-
